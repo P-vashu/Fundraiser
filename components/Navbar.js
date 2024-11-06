@@ -2,6 +2,7 @@
 import React, { useState, useRef,useEffect } from 'react'
 import { useSession, signIn, signOut, SessionProvider } from "next-auth/react"
 import Link from 'next/link'
+import Image from 'next/image'
 
 
 const Navbar = () => {
@@ -33,7 +34,7 @@ const Navbar = () => {
     return (
         <nav className='bg-gray-900 text-white flex items-center justify-between  px-4 h-16'>
             <Link href={"/"} className='logo font-bold text-lg flex justify-center items-center'>
-                <img src="/chai2.gif" alt="" width={44} />
+                <Image src="/chai2.gif" alt="" width={44} />
                 <span>
                     GetMeCHai!
                 </span>
