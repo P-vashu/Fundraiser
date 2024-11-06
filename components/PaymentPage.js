@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import Script from 'next/script'
+import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { fetchpayments, intiate, fetchuser } from '@/actions/useraction'
 import { useSearchParams } from 'next/navigation'
@@ -102,9 +103,9 @@ const PaymentPage = ({ username }) => {
             <ToastContainer />
             <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
             <div className='cover w-full relative'>
-                <img className="object-cover w-full h-[350]" src={currentUser.coverpic} alt="" />
+                <Image className="object-cover w-full h-[350]" src={currentUser.coverpic} alt="" />
                 <div className='absolute -bottom-12 md:right-[46%] border-white border-2 overflow-hidden  rounded-full size-24'>
-                    <img className='rounded-full object-cover size-24' width={128} height={128} src={currentUser.profilepic} alt="" />
+                    <Image className='rounded-full object-cover size-24' width={128} height={128} src={currentUser.profilepic} alt="" />
                 </div>
             </div>
             <div className="info flex flex-col justify-center items-center my-14 gap-2">
@@ -125,7 +126,7 @@ const PaymentPage = ({ username }) => {
                             {payments.length == 0 && <li>No payments yet</li>}
                             {payments.map((p, i) => {
                                 return <li key={i} className='my-4 flex gap-2 items-center'>
-                                    <img width={20} src="/avatar.gif" alt="user avatar" />
+                                    <Image width={20} src="/avatar.gif" alt="user avatar" />
                                     <span>
                                         {p.name} donated <span className='font-bold'>₹{p.amount}</span> with a message "{p.message}"
                                     </span>
