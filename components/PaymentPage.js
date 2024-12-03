@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Bounce } from 'react-toastify';
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 
 const PaymentPage = ({ username }) => {
     const {data: session}=useSession()
@@ -103,7 +104,7 @@ const PaymentPage = ({ username }) => {
             <ToastContainer />
             <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
             <div className='cover w-full relative'>
-                <Image className="object-cover w-full h-[350]" src={currentUser.coverpic} alt="" />
+                <Image className="object-cover w-full h-[350]" width={100} height={350} src={currentUser.coverpic} alt="" />
                 <div className='absolute -bottom-12 md:right-[46%] border-white border-2 overflow-hidden  rounded-full size-24'>
                     <Image className='rounded-full object-cover size-24' width={128} height={128} src={currentUser.profilepic} alt="" />
                 </div>
@@ -126,7 +127,7 @@ const PaymentPage = ({ username }) => {
                             {payments.length == 0 && <li>No payments yet</li>}
                             {payments.map((p, i) => {
                                 return <li key={i} className='my-4 flex gap-2 items-center'>
-                                    <Image width={20} src="/avatar.gif" alt="user avatar" />
+                                    <Image width={20} height={10} src="/avatar.gif" alt="user avatar" />
                                     <span>
                                         {p.name} donated <span className='font-bold'>₹{p.amount}</span> with a message "{p.message}"
                                     </span>
