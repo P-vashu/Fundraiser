@@ -11,13 +11,29 @@ import { Bounce } from 'react-toastify';
 import { useRouter } from 'next/navigation'
 
 const PaymentPage = ({ username }) => {
-    const {data: session}=useSession()
+    const { data: session } = useSession()
 
-    const [paymentform, setpaymentform] = useState({name:"",message:"", amount:""})
+    const [paymentform, setpaymentform] = useState({ name: "", message: "", amount: "" })
     const [currentUser, setcurrentUser] = useState({})
     const [payments, setpayments] = useState([])
     const searchParams = useSearchParams()
     const router = useRouter()
+
+    const getData = useCallback(async () => {
+        try {
+            let u = await fetchuser(username)
+            setcurrentUser(u)
+            let dbpayments = await fetchpayments(username)
+            setpayments(dbpayments)
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+            toast.error("Failed to fetch user data.", {
+                position: "top-right",
+                autoClose: 3000,
+                theme: "dark",
+            });
+        }
+    }, [session]);
 
     useEffect(() => {
         if (!session) {
@@ -26,38 +42,31 @@ const PaymentPage = ({ username }) => {
         else {
             getData()
         }
-    }, [session, router])
+    }, [session, getData, router])
 
     useEffect(() => {
-        if(searchParams.get("paymentdone") == "true"){
-        toast('Thanks for your donation!', {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
+        if (searchParams.get("paymentdone") == "true") {
+            toast('Thanks for your donation!', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
             });
         }
         router.push(`/${username}`)
-     
-    }, [searchParams, router, username])
 
-    const getData = async () => {
-        let u = await fetchuser(username)
-        setcurrentUser(u)
-        let dbpayments = await fetchpayments(username)
-        setpayments(dbpayments)
-    }
+    }, [searchParams, router, username])
 
     const handleChange = (e) => {
         setpaymentform({ ...paymentform, [e.target.name]: e.target.value })
     }
 
-    
+
 
     const pay = async (amount) => {
         //get the order id 
@@ -118,7 +127,7 @@ const PaymentPage = ({ username }) => {
                     Lets help {username} get a chai
                 </div>
                 <div className='text-slate-300'>
-                    {payments.length} Payments . ₹{payments.reduce((a,b)=>a+b.amount,0)} raised . Posts$17,200/release
+                    {payments.length} Payments . ₹{payments.reduce((a, b) => a + b.amount, 0)} raised . Posts$17,200/release
                 </div>
                 <div className="payment flex gap-4 w-[80%] mt-10">
                     <div className="supporters w-1/2 bg-slate-900 rounded-lg p-10">
