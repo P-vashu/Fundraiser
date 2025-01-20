@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <div className="text-white gap-4 flex flex-col justify-center items-center h-[44vh]">
-        <div className="font-bold text-5xl flex gap-2 justify-center items-baseline">Buy Me A Chai <span><Image src="/chai1.gif" alt="Not showing" height={44} width={44} /></span></div>
+        <div className="font-bold text-5xl flex gap-2 justify-center items-baseline">Buy Me A Chai <span><Image src="/chai1.gif" alt="Not showing" height={44} width={44}  unoptimized={true} /></span></div>
         <p>A crowdfunding platform for creators. Get funded by your fans and followers.</p>
         <div>
           <Link href={"login"}>
@@ -24,17 +24,17 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-center mb-14">Your fans can buy you a chai</h2>
         <div className="flex gap-5 justify-around">
           <div className="item space-y-3 flex flex-col justify-center items-center">
-            <Image className="bg-slate-400 rounded-full p-6" src="/man1.png" alt="" height={140} width={140} />
+            <Image className="bg-slate-400 rounded-full p-6" src="/man1.png" alt="" height={140} width={140}  unoptimized={true} />
             <p className="font-bold">Fund yourself</p>
             <p>Your fans are availabel for you to help</p>
           </div>
           <div className="item space-y-3 flex flex-col justify-center items-center">
-            <Image className="bg-slate-400 rounded-full p-0" src="/coin2.gif" alt="" height={150} width={150} />
+            <Image className="bg-slate-400 rounded-full p-0" src="/coin2.gif" alt="" height={150} width={150}  unoptimized={true} />
             <p className="font-bold">Fund yourself</p>
             <p>Your fans are availabel for you to help</p>
           </div>
           <div className="item space-y-3 flex flex-col justify-center items-center">
-            <Image className="bg-slate-400 rounded-full p-2" src="/people.png" alt="" height={140} width={140} />
+            <Image className="bg-slate-400 rounded-full p-2" src="/people.png" alt="" height={140} width={140}  unoptimized={true} />
             <p className="font-bold">Fans wants to help</p>
             <p>Your fans are availabel for you to help</p>
           </div>

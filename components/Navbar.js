@@ -34,7 +34,7 @@ const Navbar = () => {
     return (
         <nav className='bg-gray-900 text-white flex items-center justify-between  px-4 h-16'>
             <Link href={"/"} className='logo font-bold text-lg flex justify-center items-center'>
-                <Image src="/chai2.gif" alt="" height={44} width={44} />
+                <Image src="/chai2.gif" alt="" height={44} width={44}   unoptimized={true}/>
                 <span>
                     GetMeCHai!
                 </span>

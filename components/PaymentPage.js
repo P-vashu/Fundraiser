@@ -114,9 +114,9 @@ const PaymentPage = ({ username }) => {
             <ToastContainer />
             <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
             <div className='cover w-full relative'>
-                <Image className="object-cover w-full h-[350]" width={100} height={350} src={currentUser.coverpic} alt="" />
+                <Image className="object-cover w-full h-[350]" width={100} height={350} src={currentUser.coverpic} alt=""  unoptimized={true}/>
                 <div className='absolute -bottom-12 md:right-[46%] border-white border-2 overflow-hidden  rounded-full size-24'>
-                    <Image className='rounded-full object-cover size-24' width={128} height={128} src={currentUser.profilepic} alt="" />
+                    <Image className='rounded-full object-cover size-24' width={128} height={128} src={currentUser.profilepic} alt=""  unoptimized={true}/>
                 </div>
             </div>
             <div className="info flex flex-col justify-center items-center my-14 gap-2">
@@ -137,7 +137,7 @@ const PaymentPage = ({ username }) => {
                             {payments.length == 0 && <li>No payments yet</li>}
                             {payments.map((p, i) => {
                                 return <li key={i} className='my-4 flex gap-2 items-center'>
-                                    <Image width={20} height={10} src="/avatar.gif" alt="user avatar" />
+                                    <Image width={20} height={10} src="/avatar.gif" alt="user avatar"  unoptimized={true}/>
                                     <span>
                                         {p.name} donated <span className='font-bold'>₹{p.amount}</span> with a message &quot;{p.message}&quot;
                                     </span>
