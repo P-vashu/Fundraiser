@@ -1,22 +1,26 @@
 "use client"
-import React,{useRef,useEffect} from 'react'
-import Script from 'next/script'
-import Link from 'next/link'
-import ApexCharts from 'apexcharts'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import React, { useRef, useEffect } from "react";
+import dynamic from "next/dynamic";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+
+// Ensure ApexCharts is imported dynamically with SSR disabled
+const ApexCharts = dynamic(() => import("apexcharts"), { ssr: false });
 
 const Earnings = () => {
-  const {data: session}=useSession()
-  const router=useRouter()
-  useEffect(() => {
-    if (!session) {
-        router.push("/login")
-    }
-}, [session,router])
-
+  const { data: session } = useSession();
+  const router = useRouter();
   const chartRef = useRef(null);
 
+  // Redirect to login if session is not available
+  useEffect(() => {
+    if (!session) {
+      router.push("/login");
+    }
+  }, [session, router]);
+
+  // Chart options configuration
   const getChartOptions = () => ({
     series: [35.1, 23.5, 2.4, 5.4],
     colors: ["#1C64F2", "#16BDCA", "#FDBA8C", "#E74694"],
@@ -37,7 +41,7 @@ const Earnings = () => {
               show: true,
               label: "Unique visitors",
               formatter: function (w) {
-                const sum = w.globals.seriesTotals.reduce((a, b) => a + b, 0)
+                const sum = w.globals.seriesTotals.reduce((a, b) => a + b, 0);
                 return `$${sum}k`;
               },
             },
@@ -51,14 +55,15 @@ const Earnings = () => {
     },
   });
 
+  // Initialize and render the chart
   useEffect(() => {
     if (!chartRef.current) return;
 
-    const chart = new ApexCharts(chartRef.current, getChartOptions());
-    chart.render();
+    const chartInstance = new ApexCharts(chartRef.current, getChartOptions());
+    chartInstance.render();
 
     return () => {
-      chart.destroy();
+      chartInstance.destroy();
     };
   }, []);
   
