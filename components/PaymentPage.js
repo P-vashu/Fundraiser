@@ -33,7 +33,7 @@ const PaymentPage = ({ username }) => {
                 theme: "dark",
             });
         }
-    }, [session, username]);
+    }, [username]);
 
     useEffect(() => {
         if (!session) {
