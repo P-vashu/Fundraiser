@@ -27,18 +27,34 @@ export const intiate = async (amount, to_username, paymentfrom) => {
     return x
 }
 
-export const fetchuser =async (username)=>{
-    await connectDb()
-    let u= await User.findOne({username:username})
-    let user= u.toObject({flattenObjectIds:true})
-    return user
-}
+export const fetchuser = async (username) => {
+    await connectDb();
+    const user = await User.findOne({ username }).lean(); // Fetch as plain JS object
+    if (!user) return null;
 
-export const fetchpayments =async (username)=>{
-    await connectDb()
-    let p=await Payment.find({to_user:username, done:true}).sort({amount: -1}).limit(10).lean()
-    return p
-}
+    return {
+        ...user,
+        _id: user._id.toString(), // Convert ObjectId to string
+        createdAt: user.createdAt ? user.createdAt.toISOString() : null, // Convert Date to string
+        updatedAt: user.updatedAt ? user.updatedAt.toISOString() : null, // Convert Date to string
+    };
+};
+
+// Function to fetch payments
+export const fetchpayments = async (username) => {
+    await connectDb();
+    const payments = await Payment.find({ to_user: username, done: true })
+        .sort({ amount: -1 })
+        .limit(10)
+        .lean(); // Fetch as plain JS object
+
+    return payments.map(payment => ({
+        ...payment,
+        _id: payment._id.toString(), // Convert ObjectId to string
+        createdAt: payment.createdAt ? payment.createdAt.toISOString() : null, // Convert Date to string
+        updatedAt: payment.updatedAt ? payment.updatedAt.toISOString() : null, // Convert Date to string
+    }));
+};
 
 export const updateProfile= async (data,oldusername)=>{
     await connectDb()
