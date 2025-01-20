@@ -46,7 +46,7 @@ const PaymentPage = ({ username }) => {
 
     useEffect(() => {
         if (searchParams.get("paymentdone") == "true") {
-            toast('Thanks for your donation!', {
+            toast("Thanks for your donation!", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -139,7 +139,7 @@ const PaymentPage = ({ username }) => {
                                 return <li key={i} className='my-4 flex gap-2 items-center'>
                                     <Image width={20} height={10} src="/avatar.gif" alt="user avatar" />
                                     <span>
-                                        {p.name} donated <span className='font-bold'>₹{p.amount}</span> with a message "{p.message}"
+                                        {p.name} donated <span className='font-bold'>₹{p.amount}</span> with a message &quot;{p.message}&quot;
                                     </span>
                                 </li>
                             })}
@@ -167,7 +167,6 @@ const PaymentPage = ({ username }) => {
                     </div>
                 </div>
             </div>
-            {/* <div className="faltu">Era hhdolflkdfdv</div> */}
         </>
     )
 }
