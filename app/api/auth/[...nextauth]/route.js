@@ -35,6 +35,9 @@ export const authoptions= NextAuth({
     //   from: 'NextAuth.js <no-reply@example.com>'
     // }),
   ],
+
+  secret: process.env.NEXTAUTH_SECRET,  // Adding the secret for production
+  
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       if(account.provider=="github"){       
